@@ -1,0 +1,15 @@
+services: # Define todos los "servicios" o contenedores que formarán tu aplicación
+  db: # El nombre que le damos a nuestro servicio de base de datos
+    image: postgres:15 # Usa la imagen oficial de PostgreSQL versión 15 desde Docker Hub
+    restart: always # Reinicia el contenedor automáticamente si se detiene
+    environment: # Pasa las variables de entorno (secretos) al contenedor
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=passblog
+      - POSTGRES_DB=be-db
+    ports: # Mapea los puertos -> "PUERTO_EN_TU_MAQUINA:PUERTO_EN_EL_CONTENEDOR"
+      - '5432:5432'
+    volumes: # Persiste los datos de la base de datos
+      - pgdata:/var/lib/postgresql/data
+
+volumes: # Declara el volumen para que Docker lo gestione
+  pgdata:
